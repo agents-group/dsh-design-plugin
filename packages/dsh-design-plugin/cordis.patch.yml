@@ -1,0 +1,13 @@
+# dsh-design-plugin bundle patch: design-mode host tool + client UI, layered
+# over dsh-base and (on the web profile) dsh-web-app. Install with
+#   dsh plugin --profile web add @deepseek-ai/dsh-design-plugin
+# and rebuild the client bundle before probing a live dsh web server.
+
+- insert:
+    # Host half: the design_locate_source tool + design-mode prompt section.
+    - id: design
+      name: '@deepseek-ai/dsh-design-plugin'
+
+    # Client half: the sidebar toggle + full-frame design overlay (browser roster).
+    - id: design-client
+      name: '@deepseek-ai/dsh-client-ui-design'

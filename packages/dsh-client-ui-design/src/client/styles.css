@@ -1,0 +1,23 @@
+/* Global design-mode reflow, injected for the owning plugin's lifetime and
+ * keyed off the `data-dsh-design-mode` body flag. The conversation center
+ * column shrinks to the resizable chat width (a CSS custom property set by the
+ * overlay), while the sidebar and details collapse to zero. */
+
+[data-dsh-design-mode='true'] [data-slot='root'] > div {
+  grid-template-columns: 0 minmax(0, var(--dsh-design-chat-width, 25%)) 0 !important;
+}
+
+/* Pause the track transition while the divider drags, so the column edge stays
+ * pinned to the pointer (mirrors AppFrame's data-dragging behavior). */
+[data-dsh-design-dragging='true'] [data-slot='root'] > div {
+  transition: none !important;
+}
+
+/* Drop the 1px column seams that would otherwise paint at the 0-width edges. */
+[data-dsh-design-mode='true'] [data-slot='root'] > div > :has(> [data-slot='sidebar']) {
+  border-right: none;
+}
+
+[data-dsh-design-mode='true'] [data-slot='root'] > div > :has(> [data-slot='details']) {
+  border-left: none;
+}

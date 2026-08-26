@@ -1,0 +1,10 @@
+{
+  "name": "dsh-design-plugin-monorepo",
+  "version": "0.1.0-rc.8",
+  "private": true,
+  "description": "Design mode for DeepSeek Harness: 25% chat + 75% iframe preview with element-selection citations and a design_locate_source tool.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "engines": { "node": "^22.19.0 || >=24.0.0" }
+}

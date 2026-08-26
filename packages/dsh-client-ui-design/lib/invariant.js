@@ -1,0 +1,25 @@
+//#region lib/types/invariant.js
+/**
+* Package-owned invariant companion for `@deepseek-ai/dsh-client-ui-design`.
+* @module @deepseek-ai/dsh-client-ui-design/invariant
+*/
+const PACKAGE_NAME = "@deepseek-ai/dsh-client-ui-design";
+/** Cordis companion plugin name. */
+const name = "client-ui-design-invariant";
+/** Service required before the companion can reserve package ownership. */
+const inject = ["invariants"];
+/**
+* No runtime invariant: the design-mode surface is pure client presentation —
+* it contributes no cordis events, owns no cross-plugin mutable state, and
+* its interaction state lives in a registration-scoped store asserted directly
+* by component specs.
+*/
+const install = () => {};
+/**
+* Register this package's invariant companion.
+* @param ctx - Cordis context carrying the invariant service.
+* @returns the installed registration's disposer after setup succeeds.
+*/
+const apply = (ctx) => Promise.resolve(ctx.invariants.register(PACKAGE_NAME, install));
+//#endregion
+export { apply, inject, name };
