@@ -115,31 +115,35 @@ async function proxyTarget(target, res) {
  * @param ctx - the host context.
  */
 export function registerDesignProxy(ctx) {
-    const webServer = ctx.get('webServer');
-    if (webServer === undefined)
-        return;
-    ctx.effect(() => webServer.register({
-        kind: 'prefix',
-        path: DESIGN_PROXY_PATH,
-        handler: (req, res) => {
-            const pathname = new URL(req.url ?? '/', 'http://x').pathname;
-            const segment = pathname.slice(PROXY_PREFIX.length);
-            if (segment === '') {
-                res.writeHead(400, { 'content-type': 'text/plain' });
-                res.end('url required');
-                return;
-            }
-            let target;
-            try {
-                target = decodeUrl(segment);
-            }
-            catch {
-                res.writeHead(400, { 'content-type': 'text/plain' });
-                res.end('invalid url');
-                return;
-            }
-            return proxyTarget(target, res);
-        },
-    }), 'design: proxy route');
+    // Optional injection: register the route once webServer is available, without
+    // blocking the plugin's main apply (so the tool still works headless).
+    ctx.inject(['webServer'], (webCtx) => {
+        const webServer = webCtx.get('webServer');
+        if (webServer === undefined)
+            return;
+        webCtx.effect(() => webServer.register({
+            kind: 'prefix',
+            path: DESIGN_PROXY_PATH,
+            handler: (req, res) => {
+                const pathname = new URL(req.url ?? '/', 'http://x').pathname;
+                const segment = pathname.slice(PROXY_PREFIX.length);
+                if (segment === '') {
+                    res.writeHead(400, { 'content-type': 'text/plain' });
+                    res.end('url required');
+                    return;
+                }
+                let target;
+                try {
+                    target = decodeUrl(segment);
+                }
+                catch {
+                    res.writeHead(400, { 'content-type': 'text/plain' });
+                    res.end('invalid url');
+                    return;
+                }
+                return proxyTarget(target, res);
+            },
+        }), 'design: proxy route');
+    });
 }
 //# sourceMappingURL=proxy.js.map
