@@ -8,6 +8,7 @@
 import type { Context } from '@deepseek-ai/cordis'
 import { defineTool } from '@deepseek-ai/dsh-tools'
 import { locateSource, type LocateResult } from './locate.ts'
+import { registerDesignProxy } from './proxy.ts'
 
 /** Cordis plugin name used by loader diagnostics. */
 export const name = 'design'
@@ -87,4 +88,5 @@ export function apply(ctx: Context): void {
     },
   })
   ctx.tools.register(tool)
+  registerDesignProxy(ctx)
 }

@@ -6,6 +6,7 @@
  */
 import { defineTool } from '@deepseek-ai/dsh-tools';
 import { locateSource } from "./locate.js";
+import { registerDesignProxy } from "./proxy.js";
 /** Cordis plugin name used by loader diagnostics. */
 export const name = 'design';
 /** Services required before the tool and prompt section can register. */
@@ -80,5 +81,6 @@ export function apply(ctx) {
         },
     });
     ctx.tools.register(tool);
+    registerDesignProxy(ctx);
 }
 //# sourceMappingURL=index.js.map

@@ -4,10 +4,10 @@ window.__ModuleLoader__.load({
 		var module = { exports: {} };
 		var exports = module.exports;
 		Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
-		let react_jsx_runtime = require("react/jsx-runtime");
 		let react = require("react");
 		let _deepseek_ai_dsh_client_runtime_client = require("@deepseek-ai/dsh-client-runtime/client");
-		//#region lib/types/client/cite.js
+		let react_jsx_runtime = require("react/jsx-runtime");
+		//#region src/client/cite.ts
 		/** Source name keying the `design` reference codec. */
 		const DESIGN_SOURCE = "design";
 		/**
@@ -212,7 +212,7 @@ window.__ModuleLoader__.load({
 			}, "ui-design: citation removal watch");
 		}
 		//#endregion
-		//#region lib/types/client/bridge.js
+		//#region src/client/bridge.ts
 		/**
 		* The selection bridge injected into a same-origin preview iframe, and the
 		* snippet a cross-origin preview app must include itself to participate.
@@ -388,7 +388,7 @@ window.__ModuleLoader__.load({
   })
 })()`;
 		//#endregion
-		//#region lib/types/client/stores.js
+		//#region src/client/stores.ts
 		/**
 		* Design-mode interaction store: the transient viewing state behind the
 		* sidebar toggle and the full-frame design overlay. Both entries are
@@ -466,7 +466,7 @@ window.__ModuleLoader__.load({
 			"urlWrap": "_WIuaa_urlWrap"
 		};
 		//#endregion
-		//#region lib/types/client/DesignMode.js
+		//#region src/client/DesignMode.tsx
 		/**
 		* Full-frame design-mode overlay. While active it re-flows the app shell to a
 		* 25% chat column (via the `data-dsh-design-mode` body attribute and the
@@ -476,8 +476,21 @@ window.__ModuleLoader__.load({
 		* drives the bridge's hover-highlight / click-select mode, and the URL field
 		* keeps a recent history it offers on focus.
 		*/
+		/**
+		* Rewrite a preview target to the same-origin proxy route when it is cross-origin
+		* with the DSH UI, so the overlay can inject the selection bridge (browsers block
+		* cross-origin iframe DOM access). Same-origin targets load directly. The address
+		* bar keeps showing the original URL; only the iframe src is proxied.
+		*/
+		const proxySrc = (target) => {
+			if (target === "") return target;
+			try {
+				if (new URL(target).origin === window.location.origin) return target;
+			} catch {}
+			return "/api/design.proxy?url=" + encodeURIComponent(target);
+		};
 		/** Close/exit glyph. */
-		const CloseIcon = () => (0, react_jsx_runtime.jsx)("svg", {
+		const CloseIcon = () => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {
 			viewBox: "0 0 24 24",
 			width: "16",
 			height: "16",
@@ -487,10 +500,10 @@ window.__ModuleLoader__.load({
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
 			"aria-hidden": "true",
-			children: (0, react_jsx_runtime.jsx)("path", { d: "M18 6 6 18M6 6l12 12" })
+			children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "M18 6 6 18M6 6l12 12" })
 		});
 		/** Cursor glyph: element-selection mode. */
-		const CursorIcon = () => (0, react_jsx_runtime.jsx)("svg", {
+		const CursorIcon = () => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {
 			viewBox: "0 0 24 24",
 			width: "16",
 			height: "16",
@@ -500,7 +513,7 @@ window.__ModuleLoader__.load({
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
 			"aria-hidden": "true",
-			children: (0, react_jsx_runtime.jsx)("path", { d: "m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z" })
+			children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z" })
 		});
 		const DesignMode = ({ useStore, actions, citeSelection, removeCitation, useCitation }) => {
 			const active = useStore((s) => s.active);
@@ -643,34 +656,34 @@ window.__ModuleLoader__.load({
 				delete document.body.dataset.dshDesignDragging;
 			}, [actions]);
 			if (!active) return null;
-			return (0, react_jsx_runtime.jsxs)("div", {
+			return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 				ref: overlayRef,
 				className: DesignMode_module_css_default.overlay,
 				style: { pointerEvents: "none" },
 				children: [
-					(0, react_jsx_runtime.jsx)("div", {
+					/* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 						ref: chatDockRef,
 						className: DesignMode_module_css_default.chatDock,
 						style: { width: `${chatWidth}%` },
 						"aria-hidden": "true"
 					}),
-					(0, react_jsx_runtime.jsx)("div", {
+					/* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 						className: DesignMode_module_css_default.divider,
 						onPointerDown: onDividerDown,
 						onPointerMove: onDividerMove,
 						onPointerUp: onDividerUp,
 						onPointerCancel: onDividerUp
 					}),
-					(0, react_jsx_runtime.jsxs)("section", {
+					/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("section", {
 						className: DesignMode_module_css_default.preview,
 						style: { pointerEvents: "auto" },
 						children: [
-							(0, react_jsx_runtime.jsxs)("header", {
+							/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("header", {
 								className: DesignMode_module_css_default.header,
 								children: [
-									(0, react_jsx_runtime.jsxs)("div", {
+									/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("div", {
 										className: DesignMode_module_css_default.urlWrap,
-										children: [(0, react_jsx_runtime.jsx)("input", {
+										children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("input", {
 											className: DesignMode_module_css_default.url,
 											value: draftUrl,
 											spellCheck: false,
@@ -691,9 +704,9 @@ window.__ModuleLoader__.load({
 												commit(draftUrl);
 												window.setTimeout(() => setUrlMenuOpen(false), 150);
 											}
-										}), urlMenuOpen && urlHistory.length > 0 ? (0, react_jsx_runtime.jsx)("ul", {
+										}), urlMenuOpen && urlHistory.length > 0 ? /* @__PURE__ */ (0, react_jsx_runtime.jsx)("ul", {
 											className: DesignMode_module_css_default.urlMenu,
-											children: urlHistory.map((item) => (0, react_jsx_runtime.jsx)("li", { children: (0, react_jsx_runtime.jsx)("button", {
+											children: urlHistory.map((item) => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
 												type: "button",
 												className: DesignMode_module_css_default.urlMenuItem,
 												onMouseDown: (event) => {
@@ -706,7 +719,7 @@ window.__ModuleLoader__.load({
 											}) }, item))
 										}) : null]
 									}),
-									(0, react_jsx_runtime.jsx)("button", {
+									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
 										type: "button",
 										className: DesignMode_module_css_default.selectToggle,
 										role: "switch",
@@ -714,41 +727,41 @@ window.__ModuleLoader__.load({
 										"data-active": selectMode || void 0,
 										title: selectMode ? "切换到浏览模式" : "切换到选中模式",
 										onClick: () => actions.setSelectMode(!selectMode),
-										children: (0, react_jsx_runtime.jsx)(CursorIcon, {})
+										children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(CursorIcon, {})
 									}),
-									(0, react_jsx_runtime.jsx)("button", {
+									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
 										type: "button",
 										className: DesignMode_module_css_default.iconButton,
 										"aria-label": "退出设计模式",
 										title: "退出设计模式",
 										onClick: () => actions.setActive(false),
-										children: (0, react_jsx_runtime.jsx)(CloseIcon, {})
+										children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(CloseIcon, {})
 									})
 								]
 							}),
-							(0, react_jsx_runtime.jsx)("div", {
+							/* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 								className: DesignMode_module_css_default.frameWrap,
-								children: (0, react_jsx_runtime.jsx)("iframe", {
+								children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)("iframe", {
 									ref: frameRef,
 									className: DesignMode_module_css_default.frame,
-									src: url,
+									src: proxySrc(url),
 									title: "设计预览",
 									onLoad: onFrameLoad
 								})
 							}),
-							selections.length > 0 ? (0, react_jsx_runtime.jsxs)("footer", {
+							selections.length > 0 ? /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("footer", {
 								className: DesignMode_module_css_default.citation,
 								children: [
-									(0, react_jsx_runtime.jsxs)("span", {
+									/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("span", {
 										className: DesignMode_module_css_default.citationLabel,
 										children: ["引用 · ", selections.length]
 									}),
-									(0, react_jsx_runtime.jsx)("span", {
+									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 										className: DesignMode_module_css_default.citationText,
 										title: selections.map((item) => item.selection.text).join("、"),
 										children: selections.map((item) => item.selection.text || item.selection.tagName).join("、")
 									}),
-									(0, react_jsx_runtime.jsx)("button", {
+									/* @__PURE__ */ (0, react_jsx_runtime.jsx)("button", {
 										type: "button",
 										className: DesignMode_module_css_default.button,
 										onClick: () => {
@@ -781,9 +794,9 @@ window.__ModuleLoader__.load({
 			"separator": "R7NJpW_separator"
 		};
 		//#endregion
-		//#region lib/types/client/DesignToggle.js
+		//#region src/client/DesignToggle.tsx
 		/** Palette glyph. */
-		const PaletteIcon = () => (0, react_jsx_runtime.jsxs)("svg", {
+		const PaletteIcon = () => /* @__PURE__ */ (0, react_jsx_runtime.jsxs)("svg", {
 			viewBox: "0 0 24 24",
 			width: "16",
 			height: "16",
@@ -794,50 +807,50 @@ window.__ModuleLoader__.load({
 			strokeLinejoin: "round",
 			"aria-hidden": "true",
 			children: [
-				(0, react_jsx_runtime.jsx)("circle", {
+				/* @__PURE__ */ (0, react_jsx_runtime.jsx)("circle", {
 					cx: "13.5",
 					cy: "6.5",
 					r: ".5",
 					fill: "currentColor"
 				}),
-				(0, react_jsx_runtime.jsx)("circle", {
+				/* @__PURE__ */ (0, react_jsx_runtime.jsx)("circle", {
 					cx: "17.5",
 					cy: "10.5",
 					r: ".5",
 					fill: "currentColor"
 				}),
-				(0, react_jsx_runtime.jsx)("circle", {
+				/* @__PURE__ */ (0, react_jsx_runtime.jsx)("circle", {
 					cx: "8.5",
 					cy: "7.5",
 					r: ".5",
 					fill: "currentColor"
 				}),
-				(0, react_jsx_runtime.jsx)("circle", {
+				/* @__PURE__ */ (0, react_jsx_runtime.jsx)("circle", {
 					cx: "6.5",
 					cy: "12.5",
 					r: ".5",
 					fill: "currentColor"
 				}),
-				(0, react_jsx_runtime.jsx)("path", { d: "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" })
+				/* @__PURE__ */ (0, react_jsx_runtime.jsx)("path", { d: "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" })
 			]
 		});
 		const DesignToggle = ({ useStore, actions, wide }) => {
 			const active = useStore((s) => s.active);
-			return (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [(0, react_jsx_runtime.jsxs)("button", {
+			return /* @__PURE__ */ (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, react_jsx_runtime.jsxs)("button", {
 				type: "button",
 				className: DesignToggle_module_css_default.button,
 				"data-active": active || void 0,
 				"aria-pressed": active,
 				title: active ? "退出设计模式" : "进入设计模式",
 				onClick: () => actions.setActive(!active),
-				children: [(0, react_jsx_runtime.jsx)("span", {
+				children: [/* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 					className: DesignToggle_module_css_default.icon,
-					children: (0, react_jsx_runtime.jsx)(PaletteIcon, {})
-				}), wide ? (0, react_jsx_runtime.jsx)("span", {
+					children: /* @__PURE__ */ (0, react_jsx_runtime.jsx)(PaletteIcon, {})
+				}), wide ? /* @__PURE__ */ (0, react_jsx_runtime.jsx)("span", {
 					className: DesignToggle_module_css_default.label,
 					children: active ? "退出设计模式" : "设计模式"
 				}) : null]
-			}), wide ? (0, react_jsx_runtime.jsx)("div", {
+			}), wide ? /* @__PURE__ */ (0, react_jsx_runtime.jsx)("div", {
 				className: DesignToggle_module_css_default.separator,
 				"aria-hidden": "true"
 			}) : null] });
@@ -846,7 +859,7 @@ window.__ModuleLoader__.load({
 		//#region \0dsh-inline-css:/root/workplace/deepseek-harness-src/packages/client/ui-design/src/client/styles.css.mjs
 		var styles_css_default = "[data-dsh-design-mode=true] [data-slot=root]>div{grid-template-columns:0 minmax(0, var(--dsh-design-chat-width,25%)) 0!important}[data-dsh-design-dragging=true] [data-slot=root]>div{transition:none!important}[data-dsh-design-mode=true] [data-slot=root]>div>:has(>[data-slot=sidebar]){border-right:none}[data-dsh-design-mode=true] [data-slot=root]>div>:has(>[data-slot=details]){border-left:none}";
 		//#endregion
-		//#region lib/types/client/index.js
+		//#region src/client/index.ts
 		/** Slot registry required by this presentation plugin. */
 		const inject = ["slots"];
 		/**

@@ -65,17 +65,18 @@ packages/dsh-design-plugin/      # 宿主组合包（工具 + 提示词 + cordis
 packages/dsh-client-ui-design/   # 浏览器端 UI 库
 ~~~
 
-## 跨源预览（在 localhost:3000 选中无效的原因）
+## 跨源预览（默认已由 DSH 代理）
 
-选中引用依赖一段桥接脚本在**被预览的页面**里运行。设计模式会自动把它注入 **同源** 预览；若预览是 **跨源**（典型：DSH Web 在 <code>localhost:3080</code>，而你的项目是 <code>localhost:3000</code>，端口不同即跨源），浏览器禁止 DSH 读取/修改 iframe 内部，脚本注入不进去，于是鼠标移动没有高亮、也没有选中边框。
+设计模式在预览一个与 DSH **不同源**的地址时（例如 DSH Web 在 <code>localhost:3080</code>、你的项目在 <code>localhost:3000</code>），默认会把这个地址交给 **DSH 服务端代理**（<code>/api/design.proxy?url=...</code>），让 iframe 以同源方式加载，从而能自动注入选中桥接脚本——你输入的地址栏仍显示原始地址，代理地址对你不可见。
 
-解决办法：在你的项目页面引入桥接脚本（把 [docs/dsh-design-bridge.js](docs/dsh-design-bridge.js) 复制到你的项目里，或把内容内联进 <code>&lt;script&gt;</code> 标签）：
+因此跨源项目**无需**再手动引入桥接脚本，即可正常出现选中高亮/边框。代理对 HTML 响应会注入 <code>&lt;base href="目标源/"&gt;</code>，使页面相对资源、链接与 <code>fetch</code> 仍指向真实目标源。
 
-~~~
-<script src="/path/to/dsh-design-bridge.js"></script>
-~~~
+几个边界情况：
+- 依赖目标源 **cookie / localStorage** 的页面：因页面 origin 变为 DSH，这部分状态不会来自目标源（预览/未登录开发环境通常无影响）。
+- 需要 <code>webServer</code> 的 Web profile 才生效；无浏览器服务器的组合（如 headless）自动回退到直接 iframe。
+- 若你在地址栏填的是一个**绝对可访问**、且希望直连的目标，仍可照常工作；仅跨源时走代理。
 
-引入后，选中的元素会通过 <code>postMessage</code> 回传给 DSH，聊天栏就会像同源预览一样出现「引用」卡片。若仍不生效，确认预览地址确实是 <code>localhost:3000</code>，且 DSH 与项目不在同一端口/域名。
+如需完全绕过代理（例如想在被预览项目里自行嵌入桥接脚本），仍可参考 [docs/dsh-design-bridge.js](docs/dsh-design-bridge.js)。
 
 ## 许可
 

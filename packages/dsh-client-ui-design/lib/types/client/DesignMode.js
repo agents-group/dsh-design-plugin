@@ -12,6 +12,25 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { BRIDGE_SOURCE } from "./bridge.js";
 import { CHAT_WIDTH_DEFAULT, CHAT_WIDTH_MAX, CHAT_WIDTH_MIN } from "./stores.js";
 import css from './DesignMode.module.css';
+const PROXY_PATH = '/api/design.proxy';
+/**
+ * Rewrite a preview target to the same-origin proxy route when it is cross-origin
+ * with the DSH UI, so the overlay can inject the selection bridge (browsers block
+ * cross-origin iframe DOM access). Same-origin targets load directly. The address
+ * bar keeps showing the original URL; only the iframe src is proxied.
+ */
+const proxySrc = (target) => {
+    if (target === '')
+        return target;
+    try {
+        if (new URL(target).origin === window.location.origin)
+            return target;
+    }
+    catch {
+        // Unparseable: pass through to the proxy, which answers 400.
+    }
+    return PROXY_PATH + '?url=' + encodeURIComponent(target);
+};
 /** Close/exit glyph. */
 const CloseIcon = () => (_jsx("svg", { viewBox: "0 0 24 24", width: "16", height: "16", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", children: _jsx("path", { d: "M18 6 6 18M6 6l12 12" }) }));
 /** Cursor glyph: element-selection mode. */
@@ -179,7 +198,7 @@ export const DesignMode = ({ useStore, actions, citeSelection, removeCitation, u
                                                     setDraftUrl(item);
                                                     actions.commitUrl(item);
                                                     setUrlMenuOpen(false);
-                                                }, children: item }) }, item))) })) : null] }), _jsx("button", { type: "button", className: css.selectToggle, role: "switch", "aria-checked": selectMode, "data-active": selectMode || undefined, title: selectMode ? '切换到浏览模式' : '切换到选中模式', onClick: () => actions.setSelectMode(!selectMode), children: _jsx(CursorIcon, {}) }), _jsx("button", { type: "button", className: css.iconButton, "aria-label": "\u9000\u51FA\u8BBE\u8BA1\u6A21\u5F0F", title: "\u9000\u51FA\u8BBE\u8BA1\u6A21\u5F0F", onClick: () => actions.setActive(false), children: _jsx(CloseIcon, {}) })] }), _jsx("div", { className: css.frameWrap, children: _jsx("iframe", { ref: frameRef, className: css.frame, src: url, title: "\u8BBE\u8BA1\u9884\u89C8", onLoad: onFrameLoad }) }), selections.length > 0 ? (_jsxs("footer", { className: css.citation, children: [_jsxs("span", { className: css.citationLabel, children: ["\u5F15\u7528 \u00B7 ", selections.length] }), _jsx("span", { className: css.citationText, title: selections.map(item => item.selection.text).join('、'), children: selections.map(item => item.selection.text || item.selection.tagName).join('、') }), _jsx("button", { type: "button", className: css.button, onClick: () => {
+                                                }, children: item }) }, item))) })) : null] }), _jsx("button", { type: "button", className: css.selectToggle, role: "switch", "aria-checked": selectMode, "data-active": selectMode || undefined, title: selectMode ? '切换到浏览模式' : '切换到选中模式', onClick: () => actions.setSelectMode(!selectMode), children: _jsx(CursorIcon, {}) }), _jsx("button", { type: "button", className: css.iconButton, "aria-label": "\u9000\u51FA\u8BBE\u8BA1\u6A21\u5F0F", title: "\u9000\u51FA\u8BBE\u8BA1\u6A21\u5F0F", onClick: () => actions.setActive(false), children: _jsx(CloseIcon, {}) })] }), _jsx("div", { className: css.frameWrap, children: _jsx("iframe", { ref: frameRef, className: css.frame, src: proxySrc(url), title: "\u8BBE\u8BA1\u9884\u89C8", onLoad: onFrameLoad }) }), selections.length > 0 ? (_jsxs("footer", { className: css.citation, children: [_jsxs("span", { className: css.citationLabel, children: ["\u5F15\u7528 \u00B7 ", selections.length] }), _jsx("span", { className: css.citationText, title: selections.map(item => item.selection.text).join('、'), children: selections.map(item => item.selection.text || item.selection.tagName).join('、') }), _jsx("button", { type: "button", className: css.button, onClick: () => {
                                     void navigator.clipboard?.writeText(selections.map(item => item.selection.text).filter(text => text !== '').join('\n'));
                                 }, children: "\u590D\u5236" })] })) : null] })] }));
 };

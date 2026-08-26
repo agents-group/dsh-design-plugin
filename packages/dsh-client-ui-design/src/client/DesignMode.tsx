@@ -24,6 +24,24 @@ interface SelectionMessage {
   href?: string
 }
 
+const PROXY_PATH = '/api/design.proxy'
+
+/**
+ * Rewrite a preview target to the same-origin proxy route when it is cross-origin
+ * with the DSH UI, so the overlay can inject the selection bridge (browsers block
+ * cross-origin iframe DOM access). Same-origin targets load directly. The address
+ * bar keeps showing the original URL; only the iframe src is proxied.
+ */
+const proxySrc = (target: string): string => {
+  if (target === '') return target
+  try {
+    if (new URL(target).origin === window.location.origin) return target
+  } catch {
+    // Unparseable: pass through to the proxy, which answers 400.
+  }
+  return PROXY_PATH + '?url=' + encodeURIComponent(target)
+}
+
 /** Close/exit glyph. */
 const CloseIcon = (): ReactElement => (
   <svg
@@ -284,7 +302,7 @@ export const DesignMode: FC<DesignModeProps> = ({ useStore, actions, citeSelecti
           <iframe
             ref={frameRef}
             className={css.frame}
-            src={url}
+            src={proxySrc(url)}
             title="设计预览"
             onLoad={onFrameLoad}
           />
