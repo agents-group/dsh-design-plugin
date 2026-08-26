@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-	id: "@deepseek-ai/dsh-client-ui-design",
+	id: "@dpsagent/dsh-client-ui-design",
 	factory: (require) => {
 		var module = { exports: {} };
 		var exports = module.exports;
@@ -435,10 +435,10 @@ window.__ModuleLoader__.load({
 		//#endregion
 		//#region \0dsh-css:/root/workplace/deepseek-harness-src/packages/client/ui-design/src/client/DesignMode.module.css.mjs
 		const css$1 = "._WIuaa_overlay{z-index:20;display:flex;position:absolute;inset:0}._WIuaa_chatDock{min-width:0}._WIuaa_divider{cursor:col-resize;pointer-events:auto;touch-action:none;flex:none;width:8px;position:relative}._WIuaa_divider:after{content:\"\";background:var(--dsw-alias-border-l2);width:1px;transition:background var(--ds-transition-duration-fast) var(--ds-ease-in-out);position:absolute;top:0;bottom:0;left:50%;transform:translate(-50%)}._WIuaa_divider:hover:after{background:var(--dsw-alias-brand-primary)}._WIuaa_preview{background:var(--dsw-alias-bg-base);border-left:1px solid var(--dsw-alias-border-l2);flex-direction:column;flex:1;min-width:0;display:flex}._WIuaa_header{border-bottom:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);flex:none;align-items:center;gap:8px;min-width:0;padding:8px 12px;display:flex}._WIuaa_urlWrap{flex:0 320px;min-width:120px;position:relative}._WIuaa_url{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);width:100%;min-width:0;height:32px;color:var(--dsw-alias-label-primary);transition:border-color var(--ds-transition-duration-fast) var(--ds-ease-in-out), box-shadow var(--ds-transition-duration-fast) var(--ds-ease-in-out);border-radius:8px;outline:none;padding:0 10px;font-family:inherit;font-size:13px;line-height:20px;display:block}._WIuaa_url::placeholder{color:var(--dsw-alias-label-tertiary)}._WIuaa_url:focus{border-color:var(--dsw-alias-brand-primary);box-shadow:0 0 0 3px color-mix(in srgb, var(--dsw-alias-brand-primary) 15%, transparent)}._WIuaa_urlMenu{background:var(--dsw-specific-menu);border:1px solid var(--dsw-alias-border-inverted);max-height:240px;box-shadow:var(--dsw-shadow-lv3);z-index:30;border-radius:12px;margin:0;padding:4px;list-style:none;position:absolute;top:calc(100% + 6px);left:0;right:0;overflow-y:auto}._WIuaa_urlMenuItem{width:100%;color:var(--dsw-alias-label-primary);text-align:left;cursor:pointer;text-overflow:ellipsis;white-space:nowrap;background:0 0;border:none;border-radius:8px;padding:6px 8px;font-family:inherit;font-size:13px;line-height:20px;display:block;overflow:hidden}._WIuaa_urlMenuItem:hover{background:var(--dsw-alias-interactive-bg-hover)}._WIuaa_selectToggle{width:32px;height:32px;color:var(--dsw-alias-label-primary);cursor:pointer;transition:background var(--ds-transition-duration-fast) var(--ds-ease-in-out), color var(--ds-transition-duration-fast) var(--ds-ease-in-out);background:0 0;border:none;border-radius:8px;flex:none;justify-content:center;align-items:center;margin-left:auto;padding:0;display:inline-flex}._WIuaa_selectToggle:hover{background:var(--dsw-alias-interactive-bg-hover)}._WIuaa_selectToggle[data-active]{color:var(--dsw-alias-brand-primary);background:var(--dsw-alias-interactive-bg-active)}._WIuaa_selectToggle:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb, var(--dsw-alias-brand-primary) 15%, transparent);outline:none}._WIuaa_button{border:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-base);height:32px;color:var(--dsw-alias-label-primary);cursor:pointer;white-space:nowrap;transition:background var(--ds-transition-duration-fast) var(--ds-ease-in-out);border-radius:8px;flex:none;justify-content:center;align-items:center;gap:6px;padding:0 12px;font-family:inherit;font-size:13px;line-height:20px;display:inline-flex}._WIuaa_button:hover{background:var(--dsw-alias-interactive-bg-hover)}._WIuaa_button:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb, var(--dsw-alias-brand-primary) 15%, transparent);outline:none}._WIuaa_iconButton{width:32px;height:32px;color:var(--dsw-alias-label-primary);cursor:pointer;transition:background var(--ds-transition-duration-fast) var(--ds-ease-in-out);background:0 0;border:none;border-radius:8px;flex:none;justify-content:center;align-items:center;padding:0;display:inline-flex}._WIuaa_iconButton:hover{background:var(--dsw-alias-interactive-bg-hover)}._WIuaa_iconButton:focus-visible{box-shadow:0 0 0 3px color-mix(in srgb, var(--dsw-alias-brand-primary) 15%, transparent);outline:none}._WIuaa_frameWrap{background:var(--dsw-alias-bg-layer-1);flex:1;min-height:0}._WIuaa_frame{background:#fff;border:none;width:100%;height:100%;display:block}._WIuaa_citation{border-top:1px solid var(--dsw-alias-border-l2);background:var(--dsw-alias-bg-layer-1);flex:none;align-items:center;gap:10px;padding:8px 12px;display:flex}._WIuaa_citationLabel{background:var(--dsw-alias-interactive-bg-hover);color:var(--dsw-alias-label-secondary);border-radius:999px;flex:none;padding:1px 8px;font-size:12px;font-weight:500;line-height:18px}._WIuaa_citationText{text-overflow:ellipsis;white-space:nowrap;min-width:0;color:var(--dsw-alias-label-primary);flex:1;font-size:13px;line-height:20px;overflow:hidden}._WIuaa_citationMeta{text-overflow:ellipsis;white-space:nowrap;max-width:40%;color:var(--dsw-alias-label-tertiary);flex:none;font-size:12px;line-height:18px;overflow:hidden}@media (prefers-reduced-motion:reduce){._WIuaa_url,._WIuaa_switchTrack,._WIuaa_switchThumb,._WIuaa_button{transition:none}}";
-		const tagId$1 = "@deepseek-ai/dsh-client-ui-design/DesignMode.module.css";
+		const tagId$1 = "@dpsagent/dsh-client-ui-design/DesignMode.module.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId$1) + "]") === null) {
 			const tag = document.createElement("style");
-			tag.dataset.plugin = "@deepseek-ai/dsh-client-ui-design";
+			tag.dataset.plugin = "@dpsagent/dsh-client-ui-design";
 			tag.dataset.pluginCss = tagId$1;
 			tag.textContent = css$1;
 			document.head.appendChild(tag);
@@ -766,10 +766,10 @@ window.__ModuleLoader__.load({
 		//#endregion
 		//#region \0dsh-css:/root/workplace/deepseek-harness-src/packages/client/ui-design/src/client/DesignToggle.module.css.mjs
 		const css = ".R7NJpW_button{box-sizing:border-box;width:100%;color:var(--dsw-alias-label-primary);cursor:pointer;background:0 0;border:none;border-radius:8px;flex:none;align-items:center;gap:6px;padding:8px 10px;font-family:inherit;font-size:14px;line-height:22px;display:flex;overflow:hidden}.R7NJpW_button:hover{background:var(--dsw-alias-interactive-bg-hover)}.R7NJpW_button[data-active]{color:var(--dsw-alias-brand-primary)}.R7NJpW_button:focus-visible{box-shadow:inset 0 0 0 2px var(--dsw-alias-brand-primary);outline:none}.R7NJpW_icon{flex:none;justify-content:center;align-items:center;width:16px;height:16px;display:inline-flex}.R7NJpW_label{text-overflow:ellipsis;white-space:nowrap;min-width:0;overflow:hidden}.R7NJpW_separator{background:var(--dsw-alias-border-l2);flex:none;height:1px;margin:4px 10px}";
-		const tagId = "@deepseek-ai/dsh-client-ui-design/DesignToggle.module.css";
+		const tagId = "@dpsagent/dsh-client-ui-design/DesignToggle.module.css";
 		if (typeof document !== "undefined" && document.querySelector("style[data-plugin-css=" + JSON.stringify(tagId) + "]") === null) {
 			const tag = document.createElement("style");
-			tag.dataset.plugin = "@deepseek-ai/dsh-client-ui-design";
+			tag.dataset.plugin = "@dpsagent/dsh-client-ui-design";
 			tag.dataset.pluginCss = tagId;
 			tag.textContent = css;
 			document.head.appendChild(tag);
@@ -863,8 +863,8 @@ window.__ModuleLoader__.load({
 			const removeCitation = makeRemoveCitation(ctx, citation);
 			if (typeof document !== "undefined") ctx.effect(() => {
 				const tag = document.createElement("style");
-				tag.dataset.plugin = "@deepseek-ai/dsh-client-ui-design";
-				tag.dataset.pluginCss = "@deepseek-ai/dsh-client-ui-design/styles.css";
+				tag.dataset.plugin = "@dpsagent/dsh-client-ui-design";
+				tag.dataset.pluginCss = "@dpsagent/dsh-client-ui-design/styles.css";
 				tag.textContent = styles_css_default;
 				document.head.appendChild(tag);
 				return () => {

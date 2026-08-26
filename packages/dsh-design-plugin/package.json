@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-design-plugin",
+  "name": "@dpsagent/dsh-design-plugin",
   "description": "Design-mode bundle for DeepSeek Harness: a 25% chat + 75% iframe preview with element-selection citations and a design_locate_source tool that maps selections back to workspace files.",
   "version": "0.1.0-rc.8",
   "type": "module",
@@ -31,7 +31,7 @@
     }
   },
   "dependencies": {
-    "@deepseek-ai/dsh-client-ui-design": "0.1.0-rc.8"
+    "@dpsagent/dsh-client-ui-design": "0.1.0-rc.8"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "*",

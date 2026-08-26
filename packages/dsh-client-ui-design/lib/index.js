@@ -1,7 +1,7 @@
 //#region lib/types/index.js
 /**
 * Host loader entry for the browser-only design-mode plugin.
-* @module @deepseek-ai/dsh-client-ui-design
+* @module @dpsagent/dsh-client-ui-design
 */
 /** Provides no host-side behavior. */
 function apply() {}

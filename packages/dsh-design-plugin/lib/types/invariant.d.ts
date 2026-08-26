@@ -1,6 +1,6 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-design-plugin`.
- * @module @deepseek-ai/dsh-design-plugin/invariant
+ * Package-owned invariant companion for `@dpsagent/dsh-design-plugin`.
+ * @module @dpsagent/dsh-design-plugin/invariant
  */
 import type { Context } from '@deepseek-ai/cordis';
 /** Cordis companion plugin name. */

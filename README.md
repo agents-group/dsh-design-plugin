@@ -8,8 +8,8 @@ DeepSeek Harness 的「设计模式」插件，从 [deepseek-harness](https://gi
 
 | 包 | 作用 | 类型 |
 | --- | --- | --- |
-| [@deepseek-ai/dsh-design-plugin](packages/dsh-design-plugin) | 宿主：注册 <code>design_locate_source</code> 工具 + 设计模式提示词 | 组合包（带 <code>cordis.patch.yml</code>） |
-| [@deepseek-ai/dsh-client-ui-design](packages/dsh-client-ui-design) | 浏览器端：侧栏开关、全屏 overlay、选区桥接、样式 | 客户端库 |
+| [@dpsagent/dsh-design-plugin](packages/dsh-design-plugin) | 宿主：注册 <code>design_locate_source</code> 工具 + 设计模式提示词 | 组合包（带 <code>cordis.patch.yml</code>） |
+| [@dpsagent/dsh-client-ui-design](packages/dsh-client-ui-design) | 浏览器端：侧栏开关、全屏 overlay、选区桥接、样式 | 客户端库 |
 
 ## 安装
 
@@ -17,23 +17,32 @@ DeepSeek Harness 的「设计模式」插件，从 [deepseek-harness](https://gi
 
 仓库已提交构建好的 <code>lib/</code>，安装时无需构建、也无需联网拉取额外依赖。
 
-### 方式一：从 tarball 安装（推荐）
+### 方式一：npm 安装（推荐，最简单）
+
+~~~
+dsh plugin --profile web add @dpsagent/dsh-design-plugin
+dsh web
+~~~
+
+<code>@dpsagent/dsh-design-plugin</code> 会自动带上客户端库 <code>@dpsagent/dsh-client-ui-design</code>。
+
+### 方式二：从 tarball 安装（未发布到 npm 时）
 
 ~~~
 # 在仓库里打包两个包（分别产出 .tgz）
 pnpm install
-pnpm --filter @deepseek-ai/dsh-client-ui-design pack
-pnpm --filter @deepseek-ai/dsh-design-plugin pack
+pnpm --filter @dpsagent/dsh-client-ui-design pack
+pnpm --filter @dpsagent/dsh-design-plugin pack
 
 # 把两个 .tgz 发给用户，用户在装有 harness 的机器上执行：
 dsh plugin --profile web add ./dsh-client-ui-design-0.1.0-rc.8.tgz ./dsh-design-plugin-0.1.0-rc.8.tgz
 dsh web
 ~~~
 
-### 方式二：安装本地 checkout（开发用）
+### 方式三：安装本地 checkout（开发用）
 
 ~~~
-git clone https://github.com/<你的组织>/dsh-design-plugin.git
+git clone https://github.com/agents-group/dsh-design-plugin.git
 cd dsh-design-plugin
 dsh plugin --profile web add ./packages/dsh-client-ui-design ./packages/dsh-design-plugin
 dsh web

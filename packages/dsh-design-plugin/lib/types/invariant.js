@@ -1,8 +1,8 @@
 /**
- * Package-owned invariant companion for `@deepseek-ai/dsh-design-plugin`.
- * @module @deepseek-ai/dsh-design-plugin/invariant
+ * Package-owned invariant companion for `@dpsagent/dsh-design-plugin`.
+ * @module @dpsagent/dsh-design-plugin/invariant
  */
-const PACKAGE_NAME = '@deepseek-ai/dsh-design-plugin';
+const PACKAGE_NAME = '@dpsagent/dsh-design-plugin';
 /** Cordis companion plugin name. */
 export const name = 'design-invariant';
 /** Service required before the companion can reserve package ownership. */

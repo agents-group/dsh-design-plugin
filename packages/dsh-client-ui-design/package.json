@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-client-ui-design",
+  "name": "@dpsagent/dsh-client-ui-design",
   "description": "Browser half of the DeepSeek Harness design mode: enter/exit a 25% chat + 75% iframe preview, capture element selections as citations, and route change requests back to the agent.",
   "version": "0.1.0-rc.8",
   "type": "module",

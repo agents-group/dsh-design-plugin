@@ -21,8 +21,8 @@ export function apply(ctx) {
     if (typeof document !== 'undefined') {
         ctx.effect(() => {
             const tag = document.createElement('style');
-            tag.dataset.plugin = '@deepseek-ai/dsh-client-ui-design';
-            tag.dataset.pluginCss = '@deepseek-ai/dsh-client-ui-design/styles.css';
+            tag.dataset.plugin = '@dpsagent/dsh-client-ui-design';
+            tag.dataset.pluginCss = '@dpsagent/dsh-client-ui-design/styles.css';
             tag.textContent = styles;
             document.head.appendChild(tag);
             return () => { tag.remove(); };

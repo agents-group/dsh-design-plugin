@@ -161,7 +161,7 @@ function locateSource(root, query) {
 * Design plugin host half: registers the `design_locate_source` tool that maps
 * a captured element selection back to the workspace files that mention it,
 * plus the prompt section teaching the agent the design-mode workflow.
-* @module @deepseek-ai/dsh-design-plugin
+* @module @dpsagent/dsh-design-plugin
 */
 /** Cordis plugin name used by loader diagnostics. */
 const name = "design";
