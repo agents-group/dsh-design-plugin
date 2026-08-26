@@ -1,9 +1,8 @@
 import type { Context } from '@deepseek-ai/cordis';
-/** The route path the design client rewrites the preview iframe src to. Keep in sync with DesignMode.tsx. */
+/** Route prefix the design client rewrites the preview iframe src to. */
 export declare const DESIGN_PROXY_PATH = "/__design/proxy";
 /**
- * Register the design-preview proxy route on the browser web server, when one is
- * present. On compositions without a browser server (e.g. headless) this is a no-op.
+ * Register the design-preview proxy route, when a browser web server is present.
  * @param ctx - the host context.
  */
 export declare function registerDesignProxy(ctx: Context): void;

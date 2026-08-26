@@ -476,18 +476,26 @@ window.__ModuleLoader__.load({
 		* drives the bridge's hover-highlight / click-select mode, and the URL field
 		* keeps a recent history it offers on focus.
 		*/
+		const PROXY_PATH = "/__design/proxy/";
+		/** base64url-encode a string over its UTF-8 bytes (matches the server's encoding). */
+		const toProxyUrl = (value) => {
+			const bytes = new TextEncoder().encode(value);
+			let binary = "";
+			for (const byte of bytes) binary += String.fromCharCode(byte);
+			return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+		};
 		/**
 		* Rewrite a preview target to the same-origin proxy route when it is cross-origin
-		* with the DSH UI, so the overlay can inject the selection bridge (browsers block
-		* cross-origin iframe DOM access). Same-origin targets load directly. The address
-		* bar keeps showing the original URL; only the iframe src is proxied.
+		* with the DSH UI, so the overlay can inject the selection bridge. Same-origin
+		* targets load directly. The address bar keeps the original URL; only the iframe
+		* src is proxied.
 		*/
 		const proxySrc = (target) => {
 			if (target === "") return target;
 			try {
 				if (new URL(target).origin === window.location.origin) return target;
 			} catch {}
-			return "/__design/proxy?url=" + encodeURIComponent(target);
+			return PROXY_PATH + toProxyUrl(target);
 		};
 		/** Close/exit glyph. */
 		const CloseIcon = () => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {

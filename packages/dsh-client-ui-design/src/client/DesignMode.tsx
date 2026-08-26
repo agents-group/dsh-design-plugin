@@ -24,13 +24,21 @@ interface SelectionMessage {
   href?: string
 }
 
-const PROXY_PATH = '/__design/proxy'
+const PROXY_PATH = '/__design/proxy/'
+
+/** base64url-encode a string over its UTF-8 bytes (matches the server's encoding). */
+const toProxyUrl = (value: string): string => {
+  const bytes = new TextEncoder().encode(value)
+  let binary = ''
+  for (const byte of bytes) binary += String.fromCharCode(byte)
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
 
 /**
  * Rewrite a preview target to the same-origin proxy route when it is cross-origin
- * with the DSH UI, so the overlay can inject the selection bridge (browsers block
- * cross-origin iframe DOM access). Same-origin targets load directly. The address
- * bar keeps showing the original URL; only the iframe src is proxied.
+ * with the DSH UI, so the overlay can inject the selection bridge. Same-origin
+ * targets load directly. The address bar keeps the original URL; only the iframe
+ * src is proxied.
  */
 const proxySrc = (target: string): string => {
   if (target === '') return target
@@ -39,7 +47,7 @@ const proxySrc = (target: string): string => {
   } catch {
     // Unparseable: pass through to the proxy, which answers 400.
   }
-  return PROXY_PATH + '?url=' + encodeURIComponent(target)
+  return PROXY_PATH + toProxyUrl(target)
 }
 
 /** Close/exit glyph. */

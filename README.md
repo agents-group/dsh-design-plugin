@@ -65,16 +65,16 @@ packages/dsh-design-plugin/      # 宿主组合包（工具 + 提示词 + cordis
 packages/dsh-client-ui-design/   # 浏览器端 UI 库
 ~~~
 
-## 跨源预览（默认已由 DSH 代理）
+## 跨源预览（默认由 DSH 反向代理 + URL 重写）
 
-设计模式在预览一个与 DSH **不同源**的地址时（例如 DSH Web 在 <code>localhost:3080</code>、你的项目在 <code>localhost:3000</code>），默认会把这个地址交给 **DSH 服务端代理**（<code>/__design/proxy?url=...</code>），让 iframe 以同源方式加载，从而能自动注入选中桥接脚本——你输入的地址栏仍显示原始地址，代理地址对你不可见。
+设计模式预览一个与 DSH **不同源**的地址时（例如 DSH Web 在 <code>localhost:3080</code>、你的项目在 <code>localhost:3000</code>），默认走 DSH 服务端的**反向代理**：代理把页面里的资源 URL 重写到代理路由（HTML 的 <code>src</code>/<code>href</code>/<code>srcset</code>/<code>action</code>/<code>poster</code>、内联 <code>style</code> 与 <code>&lt;style&gt;</code> 里的 <code>url()</code>，以及 CSS 的 <code>url()</code>），并注入一段 shim 把 <code>fetch</code>/<code>XHR</code>/<code>WebSocket</code>/<code>EventSource</code>/动态 <code>import()</code> 也改走代理，让整页以同源方式加载——你填的地址栏仍显示原始地址，代理地址不可见。
 
-因此跨源项目**无需**再手动引入桥接脚本，即可正常出现选中高亮/边框。代理对 HTML 响应会注入 <code>&lt;base href="目标源/"&gt;</code>，使页面相对资源、链接与 <code>fetch</code> 仍指向真实目标源。
+因此跨源项目**无需**手动嵌入桥接脚本即可出现选中高亮/边框。
 
 几个边界情况：
-- 依赖目标源 **cookie / localStorage** 的页面：因页面 origin 变为 DSH，这部分状态不会来自目标源（预览/未登录开发环境通常无影响）。
-- 需要 <code>webServer</code> 的 Web profile 才生效；无浏览器服务器的组合（如 headless）自动回退到直接 iframe。
-- 若你在地址栏填的是一个**绝对可访问**、且希望直连的目标，仍可照常工作；仅跨源时走代理。
+- 依赖目标源 **cookie / localStorage** 的页面：页面 origin 变为 DSH，这部分状态不会来自目标源。
+- 需要 <code>webServer</code> 的 Web profile 才生效；无浏览器服务器的组合（如 headless）自动回退为直接 iframe。
+- 极其复杂的站点（大量第三方 CDN、web worker / Service Worker、框架动态拼接的 URL）可能仍有个别资源无法重写，属反向代理的常见限制。
 
 如需完全绕过代理（例如想在被预览项目里自行嵌入桥接脚本），仍可参考 [docs/dsh-design-bridge.js](docs/dsh-design-bridge.js)。
 

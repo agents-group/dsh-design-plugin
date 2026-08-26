@@ -12,12 +12,20 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { BRIDGE_SOURCE } from "./bridge.js";
 import { CHAT_WIDTH_DEFAULT, CHAT_WIDTH_MAX, CHAT_WIDTH_MIN } from "./stores.js";
 import css from './DesignMode.module.css';
-const PROXY_PATH = '/__design/proxy';
+const PROXY_PATH = '/__design/proxy/';
+/** base64url-encode a string over its UTF-8 bytes (matches the server's encoding). */
+const toProxyUrl = (value) => {
+    const bytes = new TextEncoder().encode(value);
+    let binary = '';
+    for (const byte of bytes)
+        binary += String.fromCharCode(byte);
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+};
 /**
  * Rewrite a preview target to the same-origin proxy route when it is cross-origin
- * with the DSH UI, so the overlay can inject the selection bridge (browsers block
- * cross-origin iframe DOM access). Same-origin targets load directly. The address
- * bar keeps showing the original URL; only the iframe src is proxied.
+ * with the DSH UI, so the overlay can inject the selection bridge. Same-origin
+ * targets load directly. The address bar keeps the original URL; only the iframe
+ * src is proxied.
  */
 const proxySrc = (target) => {
     if (target === '')
@@ -29,7 +37,7 @@ const proxySrc = (target) => {
     catch {
         // Unparseable: pass through to the proxy, which answers 400.
     }
-    return PROXY_PATH + '?url=' + encodeURIComponent(target);
+    return PROXY_PATH + toProxyUrl(target);
 };
 /** Close/exit glyph. */
 const CloseIcon = () => (_jsx("svg", { viewBox: "0 0 24 24", width: "16", height: "16", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": "true", children: _jsx("path", { d: "M18 6 6 18M6 6l12 12" }) }));
