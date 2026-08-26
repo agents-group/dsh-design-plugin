@@ -4,6 +4,8 @@ DeepSeek Harness 的「设计模式」插件，从 [deepseek-harness](https://gi
 
 把聊天栏缩成左侧 25%、右侧 75% 的实时 iframe 预览；在预览里选中元素可生成「引用」，并调用 <code>design_locate_source</code> 工具把选区映射回工作区源码文件，让 agent 直接打开并修改对应文件。
 
+<img src="docs/screenshot.png" alt="设计模式：聊天栏 + iframe 预览 + 元素引用定位" width="880">
+
 本仓库含两个 npm 包：
 
 | 包 | 作用 | 类型 |
