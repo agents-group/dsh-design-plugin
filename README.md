@@ -65,6 +65,18 @@ packages/dsh-design-plugin/      # 宿主组合包（工具 + 提示词 + cordis
 packages/dsh-client-ui-design/   # 浏览器端 UI 库
 ~~~
 
+## 跨源预览（在 localhost:3000 选中无效的原因）
+
+选中引用依赖一段桥接脚本在**被预览的页面**里运行。设计模式会自动把它注入 **同源** 预览；若预览是 **跨源**（典型：DSH Web 在 <code>localhost:3080</code>，而你的项目是 <code>localhost:3000</code>，端口不同即跨源），浏览器禁止 DSH 读取/修改 iframe 内部，脚本注入不进去，于是鼠标移动没有高亮、也没有选中边框。
+
+解决办法：在你的项目页面引入桥接脚本（把 [docs/dsh-design-bridge.js](docs/dsh-design-bridge.js) 复制到你的项目里，或把内容内联进 <code>&lt;script&gt;</code> 标签）：
+
+~~~
+<script src="/path/to/dsh-design-bridge.js"></script>
+~~~
+
+引入后，选中的元素会通过 <code>postMessage</code> 回传给 DSH，聊天栏就会像同源预览一样出现「引用」卡片。若仍不生效，确认预览地址确实是 <code>localhost:3000</code>，且 DSH 与项目不在同一端口/域名。
+
 ## 许可
 
 [MIT](LICENSE)。本仓库是 deepseek-harness 中 design 插件的忠实抽取，版权归 DeepSeek 所有。
