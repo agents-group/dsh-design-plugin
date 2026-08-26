@@ -158,7 +158,7 @@ function locateSource(root, query) {
 //#endregion
 //#region lib/types/proxy.js
 /** The route path the design client rewrites the preview iframe src to. Keep in sync with DesignMode.tsx. */
-const DESIGN_PROXY_PATH = "/api/design.proxy";
+const DESIGN_PROXY_PATH = "/__design/proxy";
 /** Whether a response body is an HTML document (may need a <base>). */
 function isHtml(contentType) {
 	return contentType !== null && /text\/html/i.test(contentType);

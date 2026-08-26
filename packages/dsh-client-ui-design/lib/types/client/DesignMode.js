@@ -12,7 +12,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { BRIDGE_SOURCE } from "./bridge.js";
 import { CHAT_WIDTH_DEFAULT, CHAT_WIDTH_MAX, CHAT_WIDTH_MIN } from "./stores.js";
 import css from './DesignMode.module.css';
-const PROXY_PATH = '/api/design.proxy';
+const PROXY_PATH = '/__design/proxy';
 /**
  * Rewrite a preview target to the same-origin proxy route when it is cross-origin
  * with the DSH UI, so the overlay can inject the selection bridge (browsers block

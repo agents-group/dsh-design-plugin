@@ -487,7 +487,7 @@ window.__ModuleLoader__.load({
 			try {
 				if (new URL(target).origin === window.location.origin) return target;
 			} catch {}
-			return "/api/design.proxy?url=" + encodeURIComponent(target);
+			return "/__design/proxy?url=" + encodeURIComponent(target);
 		};
 		/** Close/exit glyph. */
 		const CloseIcon = () => /* @__PURE__ */ (0, react_jsx_runtime.jsx)("svg", {

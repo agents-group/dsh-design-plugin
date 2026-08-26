@@ -24,7 +24,7 @@ interface SelectionMessage {
   href?: string
 }
 
-const PROXY_PATH = '/api/design.proxy'
+const PROXY_PATH = '/__design/proxy'
 
 /**
  * Rewrite a preview target to the same-origin proxy route when it is cross-origin

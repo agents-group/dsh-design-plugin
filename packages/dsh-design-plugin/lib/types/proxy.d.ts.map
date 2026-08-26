@@ -1,1 +1,1 @@
-{"version":3,"file":"proxy.d.ts","sourceRoot":"","sources":["../../src/proxy.ts"],"names":[],"mappings":"AAiBA,OAAO,KAAK,EAAE,OAAO,EAAE,MAAM,qBAAqB,CAAA;AAElD,6GAA6G;AAC7G,eAAO,MAAM,iBAAiB,sBAAsB,CAAA;AAwEpD;;;;GAIG;AACH,wBAAgB,mBAAmB,CAAC,GAAG,EAAE,OAAO,GAAG,IAAI,CAiBtD"}
+{"version":3,"file":"proxy.d.ts","sourceRoot":"","sources":["../../src/proxy.ts"],"names":[],"mappings":"AAiBA,OAAO,KAAK,EAAE,OAAO,EAAE,MAAM,qBAAqB,CAAA;AAElD,6GAA6G;AAC7G,eAAO,MAAM,iBAAiB,oBAAoB,CAAA;AAwElD;;;;GAIG;AACH,wBAAgB,mBAAmB,CAAC,GAAG,EAAE,OAAO,GAAG,IAAI,CAiBtD"}

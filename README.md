@@ -67,7 +67,7 @@ packages/dsh-client-ui-design/   # 浏览器端 UI 库
 
 ## 跨源预览（默认已由 DSH 代理）
 
-设计模式在预览一个与 DSH **不同源**的地址时（例如 DSH Web 在 <code>localhost:3080</code>、你的项目在 <code>localhost:3000</code>），默认会把这个地址交给 **DSH 服务端代理**（<code>/api/design.proxy?url=...</code>），让 iframe 以同源方式加载，从而能自动注入选中桥接脚本——你输入的地址栏仍显示原始地址，代理地址对你不可见。
+设计模式在预览一个与 DSH **不同源**的地址时（例如 DSH Web 在 <code>localhost:3080</code>、你的项目在 <code>localhost:3000</code>），默认会把这个地址交给 **DSH 服务端代理**（<code>/__design/proxy?url=...</code>），让 iframe 以同源方式加载，从而能自动注入选中桥接脚本——你输入的地址栏仍显示原始地址，代理地址对你不可见。
 
 因此跨源项目**无需**再手动引入桥接脚本，即可正常出现选中高亮/边框。代理对 HTML 响应会注入 <code>&lt;base href="目标源/"&gt;</code>，使页面相对资源、链接与 <code>fetch</code> 仍指向真实目标源。
 

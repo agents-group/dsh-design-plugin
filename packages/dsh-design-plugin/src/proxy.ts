@@ -18,7 +18,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http'
 import type { Context } from '@deepseek-ai/cordis'
 
 /** The route path the design client rewrites the preview iframe src to. Keep in sync with DesignMode.tsx. */
-export const DESIGN_PROXY_PATH = '/api/design.proxy'
+export const DESIGN_PROXY_PATH = '/__design/proxy'
 
 /** Minimal shape of the webServer route-registration service the plugin needs. */
 interface WebServerRoute {
